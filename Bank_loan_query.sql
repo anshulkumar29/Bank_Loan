@@ -1,3 +1,8 @@
+
+
+DROP TABLE IF EXISTS loan_data;
+
+
 CREATE TABLE loan_data (
     id INTEGER PRIMARY KEY,
     address_state VARCHAR(2),
@@ -34,13 +39,15 @@ SELECT COUNT(id) AS Total_Applications FROM loan_data
 
 
 --MTD Loan Applications
-SELECT count(*)
+SELECT count(*) as MTD_Loan_Applications
 FROM loan_data
 WHERE EXTRACT(MONTH FROM issue_date) = 12;
 
+
 --PMTD Loan Applications
-SELECT COUNT(id) AS Total_Applications FROM loan_data
+SELECT COUNT(id) AS PMTD_Loan_Applications FROM loan_data
 WHERE EXTRACT(MONTH FROM issue_date) = 11;
+
 
 --Total Funded Amount
 SELECT SUM(loan_amount) AS Total_Funded_Amount FROM loan_data
@@ -65,10 +72,10 @@ SELECT SUM(total_payment) AS Total_Amount_Collected FROM loan_data
 WHERE EXTRACT(MONTH FROM issue_date) = 11;
 
 --Average Interest Rate
-SELECT AVG(int_rate)*100 AS Avg_Int_Rate FROM loan_data
+SELECT round(AVG(int_rate), 3)*100 AS Avg_Int_Rate FROM loan_data
 
 --MTD Average Interest
-SELECT AVG(int_rate)*100 AS MTD_Avg_Int_Rate FROM loan_data
+SELECT round(AVG(int_rate), 4)*100 AS MTD_Avg_Int_Rate FROM loan_data
 WHERE EXTRACT(MONTH FROM issue_date) = 12;
 
 --PMTD Average Interest
@@ -89,6 +96,8 @@ WHERE EXTRACT(MONTH FROM issue_date) = 11;
 
 --GOOD LOAN ISSUED
 --Good Loan Percentage
+
+
 SELECT
     (COUNT(CASE WHEN loan_status = 'Fully Paid' OR loan_status = 'Current' THEN id END) * 100.0) / 
 	COUNT(id) AS Good_Loan_Percentage
@@ -113,9 +122,11 @@ SELECT
     (COUNT(CASE WHEN loan_status = 'Charged Off' THEN id END) * 100.0) / 
 	COUNT(id) AS Bad_Loan_Percentage
 FROM loan_data
+
  
 --Bad Loan Applications
-SELECT COUNT(id) AS Bad_Loan_Applications FROM loan_data
+SELECT 
+COUNT(id) AS Bad_Loan_Applications FROM loan_data
 WHERE loan_status = 'Charged Off'
  
 --Bad Loan Funded Amount
@@ -147,7 +158,7 @@ SELECT
 	SUM(loan_amount) AS MTD_Total_Funded_Amount 
 FROM loan_data
 WHERE EXTRACT(MONTH FROM issue_date) = 12
-GROUP BY loan_status;
+GROUP BY loan_status
 
 
 
@@ -166,6 +177,8 @@ GROUP BY
     month_name
 ORDER BY
     month_number;
+
+
 
 --STATE
 SELECT 
@@ -186,6 +199,7 @@ SELECT
 FROM loan_data
 GROUP BY term
 ORDER BY term
+
 
 --EMPLOYEE LENGTH
 SELECT 
@@ -215,17 +229,18 @@ SELECT
 	SUM(total_payment) AS Total_Amount_Received
 FROM loan_data
 GROUP BY home_ownership
-ORDER BY home_ownership
+order by count(id)
 
-Note: We have applied multiple Filters on all the dashboards. You can check the results for the filters as well by modifying the query and comparing the results.
-For e.g
-See the results when we hit the Grade A in the filters for dashboards.
+
+--Note: We have applied multiple Filters on all the dashboards. You can check the results for the filters as well by modifying the query and comparing the results.
+--For e.g
+--See the results when we hit the Grade A in the filters for dashboards.
 SELECT 
 	purpose AS PURPOSE, 
 	COUNT(id) AS Total_Loan_Applications,
 	SUM(loan_amount) AS Total_Funded_Amount,
 	SUM(total_payment) AS Total_Amount_Received
-FROM bank_loan_data
+FROM loan_data
 WHERE grade = 'A'
 GROUP BY purpose
 ORDER BY purpose
