@@ -61,27 +61,27 @@ Imported the financial_loan.csv dataset into Tableau.
 
 Checked for:
 
-Missing values
+a)Missing values
 
-Incorrect data types
+b)Incorrect data types
 
-Duplicate records
+c)Duplicate records
 
-Converted columns like:
+d)Converted columns like:
 
-Issue Date → Date format
+e)Issue Date → Date format
 
-Interest Rate → Percentage
+f)Interest Rate → Percentage
 
 Created calculated fields:
 
-Good Loan
+a)Good Loan
 
-Bad Loan
+b)Bad Loan
 
-MTD Metrics
+c)MTD Metrics
 
-MoM Growth
+d)MoM Growth
 
 📈 Step 2: KPI Metrics Creation
 
@@ -89,23 +89,23 @@ Key performance indicators used in the dashboard:
 
 1️⃣ Loan Performance KPIs
 
-Total Loan Applications
+a)Total Loan Applications
 
-Total Funded Amount
+b)Total Funded Amount
 
-Total Amount Received
+c)Total Amount Received
 
-Average Interest Rate
+d)Average Interest Rate
 
-Average Debt-to-Income Ratio
+e)Average Debt-to-Income Ratio
 
 2️⃣ Good vs Bad Loan Analysis
 
-Good Loans
+a)Good Loans
 
-Loan Status = Fully Paid or Current
+1)Loan Status = Fully Paid or Current
 
-Metrics:
+2)Metrics:
 
 Good Loan %
 
@@ -115,11 +115,11 @@ Good Loan Funded Amount
 
 Good Loan Received Amount
 
-Bad Loans
+ b)Bad Loans
 
-Loan Status = Charged Off
+1)Loan Status = Charged Off
 
-Metrics:
+2)Metrics:
 
 Bad Loan %
 
@@ -134,9 +134,9 @@ These metrics help measure the health of the bank’s loan portfolio.
 📊 Step 3: Dashboard Development
 📍 Dashboard 1 – Loan Summary
 
-Displays high-level performance metrics.
+a)Displays high-level performance metrics.
 
-Visuals:
+1)Visuals:
 
 KPI cards
 
@@ -144,7 +144,7 @@ Loan status grid
 
 MTD & MoM trends
 
-Insights:
+2)Insights:
 
 Overall loan portfolio performance
 
